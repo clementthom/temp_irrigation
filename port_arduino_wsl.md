@@ -6,7 +6,10 @@ usbipd list (on récupére le pUID ex: 1-2)
 usbipd bind --busid 1-2
 usbipd attach --wsl --busid 1-2
 ```
-
+Pour le detacher
+```
+usbipd detach --busid 1-2
+```
 
 Dans Wsl:
 ```
