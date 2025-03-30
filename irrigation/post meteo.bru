@@ -1,0 +1,19 @@
+meta {
+  name: post meteo
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/meteo
+  body: text
+  auth: inherit
+}
+
+body:json {
+  {"date" 31, value: "9"}
+}
+
+body:text {
+  {"date": 2, "value": 4}
+}

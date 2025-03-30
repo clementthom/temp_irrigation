@@ -1,0 +1,15 @@
+meta {
+  name: delete meteo
+  type: http
+  seq: 4
+}
+
+delete {
+  url: http://localhost:3000/meteo/1e7a
+  body: text
+  auth: inherit
+}
+
+body:json {
+  {"date" 31, value: "9"}
+}

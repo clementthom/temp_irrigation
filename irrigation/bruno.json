@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "irrigation",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
