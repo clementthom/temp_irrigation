@@ -1,9 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class Mesure {
-  @ApiProperty({ description: 'Identifiant unique de la mesure' })
-  id: string;
-
+export class CreateMesureDto {
   @ApiProperty({ description: 'Température mesurée', example: 25.5 })
   temperature: number;
 
