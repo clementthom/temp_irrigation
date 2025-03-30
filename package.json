@@ -2,5 +2,8 @@
   "dependencies": {
     "http-server": "^14.1.1",
     "json-server": "^1.0.0-beta.3"
+  },
+  "scripts": {
+    "json-serveur": "npx json-server --watch db.json"
   }
 }
