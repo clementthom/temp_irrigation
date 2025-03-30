@@ -6,6 +6,7 @@ import { CronService } from './cron/cron.service';
 import { ArduinoService } from './arduino/arduino.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { MesuresModule } from './mesures/mesures.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { join } from 'path';
       rootPath: join(__dirname, '..', 'web-app/browser'),
       // serveRoot: '/static/',
     }),
+    MesuresModule,
   ],
   controllers: [AppController],
   providers: [AppService, CronService, ArduinoService],
