@@ -5,7 +5,7 @@ import { CreateMesureDto } from './dto/create-mesure.dto';
 import { UpdateMesureDto } from './dto/update-mesure.dto';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
-@ApiTags('mesures') // Tag Swagger pour regrouper les routes
+@ApiTags('mesures')
 @Controller('mesures')
 export class MesuresController {
   constructor(private readonly mesuresService: MesuresService) {}
@@ -44,5 +44,17 @@ export class MesuresController {
   @ApiResponse({ status: 200, description: 'La mesure a été supprimée.' })
   delete(@Param('id') id: string): boolean {
     return this.mesuresService.delete(id);
+  }
+
+  @Post('clear')
+  @ApiOperation({ summary: 'Supprimer toutes les mesures' })
+  @ApiResponse({ status: 200, description: 'Toutes les mesures ont été supprimées.' })
+  async clearMesures(): Promise<void> {
+    try {
+      await this.mesuresService.clearMesures();
+      console.log('Toutes les mesures ont été supprimées.');
+    } catch (error) {
+      console.error('Erreur lors de la suppression des mesures :', error.message);
+    }
   }
 }

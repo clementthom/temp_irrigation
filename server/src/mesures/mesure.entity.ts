@@ -15,4 +15,7 @@ export class Mesure {
 
   @ApiProperty({ description: 'Intensité lumineuse mesurée', example: 800 })
   lightIntensity: number;
+
+  @ApiProperty({ description: 'Horodatage de la mesure', example: '2025-03-30T12:34:56.789Z' })
+  timestamp: string; // Format ISO 8601
 }
