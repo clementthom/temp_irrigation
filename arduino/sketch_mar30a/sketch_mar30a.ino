@@ -1,7 +1,8 @@
 #include <ArduinoJson.h> // Inclusion de la bibliothèque ArduinoJson
 
 // Déclaration de la variable globale JsonDocument
-StaticJsonDocument<200> doc;
+StaticJsonDocument<200> measures;
+StaticJsonDocument<200> command;
 
 // Variables pour gérer les intervalles
 unsigned long previousMillisMeasures = 0;
@@ -15,7 +16,7 @@ void setup() {
   pinMode(6, OUTPUT); // Configuration de la pin 6 comme sortie (vanne 1)
   pinMode(7, OUTPUT); // Configuration de la pin 7 comme sortie (vanne 2)
   pinMode(5, INPUT);  // Configuration de la pin 5 comme entrée (reset)
-  doc["reset"] = 0;
+  command["reset"] = 0;
 }
 
 // Fonction pour sérialiser et envoyer le document JSON
@@ -33,13 +34,13 @@ void sendMeasures() {
   int lightIntensity = random(0, 6);           // Intensité lumineuse entre 0 et 5
   
   // Stockage des mesures dans le document JSON
-  doc["mesures"]["temperature"] = temperature;
-  doc["mesures"]["humidity1"] = humidity1;
-  doc["mesures"]["humidity2"] = humidity2;
-  doc["mesures"]["lightIntensity"] = lightIntensity;
+  measures["mesures"]["temperature"] = temperature;
+  measures["mesures"]["humidity1"] = humidity1;
+  measures["mesures"]["humidity2"] = humidity2;
+  measures["mesures"]["lightIntensity"] = lightIntensity;
 
   // Appel de la fonction send pour envoyer les données
-  send(doc["mesures"]);
+  send(measures);
 }
 
 void manageValves() {
@@ -50,9 +51,9 @@ void manageValves() {
 void reset() {
   int previousIntervalReset = intervalReset;
   if (digitalRead(5) == HIGH) {
-    if (doc["reset"] == 0) {
+    if (command["reset"] == 0) {
       // Appel de la fonction send pour envoyer les données
-      send(doc["reset"]);
+      send(command);
     }
     intervalReset = 10000;
   } else {
