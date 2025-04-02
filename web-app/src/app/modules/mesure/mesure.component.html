@@ -1,0 +1,54 @@
+<div>
+  <h1>Gestion des Mesures</h1>
+
+  <!-- Formulaire pour ajouter une nouvelle mesure -->
+  <form (ngSubmit)="addMesure()">
+    <label>
+      Température:
+      <input type="number" [(ngModel)]="newMesure.temperature" name="temperature" required />
+    </label>
+    <label>
+      Humidité 1:
+      <input type="number" [(ngModel)]="newMesure.humidity1" name="humidity1" required />
+    </label>
+    <label>
+      Humidité 2:
+      <input type="number" [(ngModel)]="newMesure.humidity2" name="humidity2" required />
+    </label>
+    <label>
+      Intensité lumineuse:
+      <input type="number" [(ngModel)]="newMesure.lightIntensity" name="lightIntensity" required />
+    </label>
+    <button type="submit">Ajouter</button>
+  </form>
+
+  <!-- Tableau des mesures -->
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Température</th>
+        <th>Humidité 1</th>
+        <th>Humidité 2</th>
+        <th>Intensité lumineuse</th>
+        <th>Horodatage</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (mesure of mesures; track mesure.id) {
+        <tr>
+          <td>{{ mesure.id }}</td>
+          <td>{{ mesure.temperature }}</td>
+          <td>{{ mesure.humidity1 }}</td>
+          <td>{{ mesure.humidity2 }}</td>
+          <td>{{ mesure.lightIntensity }}</td>
+          <td>{{ mesure.timestamp }}</td>
+          <td>
+            <button (click)="deleteMesure(mesure.id)">Supprimer</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
