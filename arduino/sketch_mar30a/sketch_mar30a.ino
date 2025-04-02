@@ -57,7 +57,7 @@ void reset() {
     }
     intervalReset = 10000;
   } else {
-    doc["reset"] = 1;
+    command["reset"] = 1;
     intervalReset = previousIntervalReset;
   }
 }
