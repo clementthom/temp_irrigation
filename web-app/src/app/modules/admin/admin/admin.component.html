@@ -4,6 +4,10 @@
 
   <!-- Bouton pour supprimer toutes les mesures -->
   <button (click)="clearMesures()">Supprimer toutes les mesures</button>
+  &nbsp;<button (click)="commandVanne(1, 'open')">Activer la vanne 1</button>
+  &nbsp;<button (click)="commandVanne(1, 'close')">Desactiver la vanne 1</button>
+  &nbsp;<button (click)="commandVanne(2, 'open')">Activer la vanne 2</button>
+  &nbsp;<button (click)="commandVanne(2, 'close')">Desactiver la vanne 2</button>
   &nbsp;<a href="http://localhost:3000"><button>Serveur JSON</button></a>
   &nbsp;<a href="http://localhost:3001/api"><button>Swagger</button></a>
 </div>

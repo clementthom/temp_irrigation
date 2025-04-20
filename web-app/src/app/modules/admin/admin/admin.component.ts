@@ -21,4 +21,17 @@ export class AdminComponent {
       }
     });
   }
+
+    // Méthode pour appeler la fonction clear
+    commandVanne(vanne: number, action: 'open' | 'close'): void {
+      this.adminService.commandVanne(vanne, action).subscribe({
+        next: () => {
+          console.log(`Vanne ${vanne} ${action}.`);
+        },
+        error: (err: Error) => {
+          console.error('Erreur lors de l\'activationde la vanne:', err);
+          alert('Erreur lors de l\'activationde la vanne');
+        }
+      });
+    }
 }

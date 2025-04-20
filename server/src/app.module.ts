@@ -7,6 +7,8 @@ import { ArduinoService } from './arduino/arduino.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { MesuresModule } from './mesures/mesures.module';
+import { CommandModule } from './command/command.module';
+import { ArduinoModule } from './arduino/arduino.module';
 
 @Module({
   imports: [
@@ -16,8 +18,10 @@ import { MesuresModule } from './mesures/mesures.module';
       // serveRoot: '/static/',
     }),
     MesuresModule,
+    CommandModule,
+    ArduinoModule,
   ],
   controllers: [AppController],
-  providers: [AppService, CronService, ArduinoService],
+  providers: [AppService, CronService],
 })
 export class AppModule {}
