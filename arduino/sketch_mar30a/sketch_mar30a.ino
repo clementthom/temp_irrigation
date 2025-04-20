@@ -1,10 +1,15 @@
 #include <ArduinoJson.h> // Inclusion de la bibliothèque ArduinoJson
 
+// Envoi d'une commande sur le port serie :
+// {"vanne":{"2":"close"}}
+
+
 // Déclaration de la variable globale JsonDocument
 StaticJsonDocument<255> measures;
 StaticJsonDocument<255> command;
 
 // Variables pour gérer les intervalles
+unsigned long currentMillis = millis();
 unsigned long previousMillisMeasures = 0;
 unsigned long previousMillisReset = 0;
 const unsigned long intervalMeasures = 5000; // Intervalle pour sendMeasures (5 secondes)
@@ -12,7 +17,6 @@ unsigned long debounceReset = 200;           // Intervalle pour check du bouton 
 
 const byte DATA_FROM_NEST_MAX_SIZE = 255;
 char data[DATA_FROM_NEST_MAX_SIZE];   // an array to store the received data
-String readString;
 
 void setup() {
   Serial.begin(9600); // Starts the serial communication
@@ -21,8 +25,7 @@ void setup() {
   pinMode(7, OUTPUT); // Configuration de la pin 7 comme sortie (vanne 2)
   pinMode(5, INPUT);  // Configuration de la pin 5 comme entrée (reset) 
   command["reset"] = 0;
-  delay(2000); // Attendre 2 secondes pour que tout soit prêt
-  receiveCommandFromNest();
+  // delay(2000); // Attendre 2 secondes pour que tout soit prêt
 }
 
 // Fonction pour sérialiser et envoyer le document JSON
@@ -30,6 +33,32 @@ void send(const JsonVariant& jsonVariant) {
   String json;
   serializeJson(jsonVariant, json); // Sérialisation du document JSON en chaîne
   Serial.println(json);             // Impression de la chaîne JSON sur le moniteur série
+}
+
+void loop() {
+  currentMillis = millis();
+  cronMesure();
+  if (!(digitalRead(5) == LOW) && command["reset"] == 0) {
+    command["reset"] = 1;
+    previousMillisReset = currentMillis;
+    send(command);
+  }
+
+  // Vérifie si l'intervalle pour manageRest est écoulé
+  if (currentMillis - previousMillisReset >= debounceReset) {
+    command["reset"] = 0;
+  }
+
+  waitCommandFromNest();
+}
+
+//*********** GESTION DES MESURES ****************
+void cronMesure() {
+  // Vérifie si l'intervalle pour sendMeasures est écoulé
+  if (currentMillis - previousMillisMeasures >= intervalMeasures) {
+    previousMillisMeasures = currentMillis;
+    sendMeasures();
+  }
 }
 
 void sendMeasures() { // Envoi les mesures au Nest toutes les intervalMeasures.
@@ -49,34 +78,14 @@ void sendMeasures() { // Envoi les mesures au Nest toutes les intervalMeasures.
   send(measures);
 }
 
+//*********** GESTION DU RESET ****************
 void reset() { // Envoi une demande de reset des valeurs au Nest si appui de digital(5).
   int previousIntervalReset = debounceReset;
  
- }
-
-void loop() {
-  unsigned long currentMillis = millis();
-  if (!(digitalRead(5) == LOW) && command["reset"] == 0) {
-    command["reset"] = 1;
-    previousMillisReset = currentMillis;
-    send(command);
-  }
-
-  // Vérifie si l'intervalle pour manageRest est écoulé
-  if (currentMillis - previousMillisReset >= debounceReset) {
-    command["reset"] = 0;
-  }
-
-  // Vérifie si l'intervalle pour sendMeasures est écoulé
-  if (currentMillis - previousMillisMeasures >= intervalMeasures) {
-    previousMillisMeasures = currentMillis;
-    sendMeasures();
-  }
-
-  receiveCommandFromNest();
 }
 
-void receiveCommandFromNest() {
+//*********** GESTION DES COMMANDES ****************
+void waitCommandFromNest() {
   static char endMarker = '\n'; // Séparateur de message
   char receivedChar;            // Caractère lu depuis le port série
   int ndx = 0;                  // Index actuel du buffer de données
@@ -119,40 +128,63 @@ void receiveCommandFromNest() {
   }
 }
 
+void manageCommandVanne(const char* vanneNumber, const char* action) {
+  Serial.print("Commande pour la vanne ");
+  Serial.print(vanneNumber);
+  Serial.print(": ");
+  Serial.println(action);
+
+  if (strcmp(vanneNumber, "1") != 0 && strcmp(vanneNumber, "2") != 0) {
+    Serial.println("Vanne non trouvée.");
+    return;
+  }
+  if (strcmp(action, "open") == 0) {
+    if (strcmp(vanneNumber, "1") == 0) {
+      flash(6,1); // Activation de la vanne 1
+    } else if (strcmp(vanneNumber, "2") == 0) {
+      flash(6,2); // Activation de la vanne 2
+    }
+  } else if (strcmp(action, "close") == 0) {
+    if (strcmp(vanneNumber, "1") == 0) {
+      flash(6,3); // Désactivation de la vanne 1
+    } else if (strcmp(vanneNumber, "2") == 0) {
+      flash(6,4); // Désactivation de la vanne 2
+    }
+  } else {
+    Serial.println("Action inconnue pour la vanne.");
+  }
+}
+
 void manageCommandFromNest() {
   if (command["vanne"]) {
     JsonObject vanneObject = command["vanne"].as<JsonObject>();
     for (JsonPair kv : vanneObject) {
       const char* vanneNumber = kv.key().c_str();
       const char* action = kv.value().as<const char*>();
-
-      Serial.print("Commande pour la vanne ");
-      Serial.print(vanneNumber);
-      Serial.print(": ");
-      Serial.println(action);
-
-      if (strcmp(action, "open") == 0) {
-        if (strcmp(vanneNumber, "1") == 0) {
-          flash(6, 1);
-        } else if (strcmp(vanneNumber, "2") == 0) {
-          flash(6, 2); // Activation de la vanne 2
-        } else {
-          Serial.println("Vanne non trouvée.");
-        }
-      } else if (strcmp(action, "close") == 0) {
-        if (strcmp(vanneNumber, "1") == 0) {
-          flash(6, 3); // Désactivation de la vanne 1
-        } else if (strcmp(vanneNumber, "2") == 0) {
-          flash(6, 4); // Désactivation de la vanne 2
-        } else {
-          Serial.println("Vanne non trouvée.");
-        }
-      } else {
-        Serial.println("Action inconnue pour la vanne.");
-      }
+      manageCommandVanne(vanneNumber, action);
     }
   } else {
     Serial.println("Aucune commande de vanne reçue.");
+  }
+
+  const char* relais_active0 = command["relais_active0"];
+  if (relais_active0) {
+    Serial.println(relais_active0);
+    if (strcmp(relais_active0, "fermee") == 0) {
+      digitalWrite(6, HIGH); // Activation de la vanne 1.
+      delay(1000);
+      digitalWrite(6, LOW);
+    } else if (strcmp(relais_active0, "ouverte") == 0) {
+      digitalWrite(6, HIGH); // Activation de la vanne 1.
+      delay(200);
+      digitalWrite(6, LOW);
+      delay(200);
+      digitalWrite(6, HIGH); // Activation de la vanne 1.
+      delay(200);
+      digitalWrite(6, LOW);
+    } else {
+      Serial.println("Commande inconnue ou non prise en charge.");
+    }
   }
 }
 

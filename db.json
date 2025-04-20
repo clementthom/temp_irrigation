@@ -18,212 +18,52 @@
   ],
   "mesures": [
     {
-      "id": "86ac",
-      "temperature": 24.9,
-      "humidity1": 62,
-      "humidity2": 61,
-      "lightIntensity": 5,
-      "timestamp": 1745143958781
-    },
-    {
-      "id": "3a88",
-      "temperature": 26.5,
-      "humidity1": 90,
-      "humidity2": 75,
-      "lightIntensity": 1,
-      "timestamp": 1745143963955
-    },
-    {
-      "id": "b638",
-      "temperature": 24.7,
-      "humidity1": 73,
-      "humidity2": 69,
-      "lightIntensity": 5,
-      "timestamp": 1745143968170
-    },
-    {
-      "id": "53cd",
-      "temperature": 24.7,
-      "humidity1": 66,
-      "humidity2": 60,
-      "lightIntensity": 0,
-      "timestamp": 1745143973339
-    },
-    {
-      "id": "0f69",
-      "temperature": 20.8,
-      "humidity1": 63,
-      "humidity2": 78,
-      "lightIntensity": 1,
-      "timestamp": 1745143978515
-    },
-    {
-      "id": "eed3",
-      "temperature": 24.3,
-      "humidity1": 74,
-      "humidity2": 80,
-      "lightIntensity": 0,
-      "timestamp": 1745143983689
-    },
-    {
-      "id": "fc6f",
-      "temperature": 24.7,
-      "humidity1": 75,
-      "humidity2": 69,
-      "lightIntensity": 0,
-      "timestamp": 1745143988862
-    },
-    {
-      "id": "8e89",
-      "temperature": 20.4,
-      "humidity1": 68,
-      "humidity2": 72,
-      "lightIntensity": 4,
-      "timestamp": 1745143994039
-    },
-    {
-      "id": "7d15",
-      "temperature": 21.6,
-      "humidity1": 62,
-      "humidity2": 69,
-      "lightIntensity": 4,
-      "timestamp": 1745143998691
-    },
-    {
-      "id": "56bb",
-      "temperature": 24.7,
-      "humidity1": 88,
-      "humidity2": 77,
-      "lightIntensity": 1,
-      "timestamp": 1745144003861
-    },
-    {
-      "id": "eeb5",
-      "temperature": 26.1,
-      "humidity1": 87,
-      "humidity2": 64,
-      "lightIntensity": 1,
-      "timestamp": 1745144009032
-    },
-    {
-      "id": "6fe0",
-      "temperature": 20,
-      "humidity1": 81,
-      "humidity2": 63,
-      "lightIntensity": 5,
-      "timestamp": 1745144014204
-    },
-    {
-      "id": "69ec",
-      "temperature": 28.3,
-      "humidity1": 79,
-      "humidity2": 89,
-      "lightIntensity": 5,
-      "timestamp": 1745144019376
-    },
-    {
-      "id": "e2de",
-      "temperature": 23.2,
-      "humidity1": 80,
-      "humidity2": 69,
-      "lightIntensity": 2,
-      "timestamp": 1745144023583
-    },
-    {
-      "id": "0d4f",
-      "temperature": 25,
-      "humidity1": 65,
-      "humidity2": 74,
-      "lightIntensity": 0,
-      "timestamp": 1745144028754
-    },
-    {
-      "id": "7ab5",
-      "temperature": 22.3,
-      "humidity1": 73,
-      "humidity2": 65,
-      "lightIntensity": 1,
-      "timestamp": 1745144033956
-    },
-    {
-      "id": "beae",
-      "temperature": 25.8,
-      "humidity1": 67,
-      "humidity2": 79,
-      "lightIntensity": 4,
-      "timestamp": 1745144039187
-    },
-    {
-      "id": "c057",
-      "temperature": 25.8,
-      "humidity1": 74,
-      "humidity2": 82,
-      "lightIntensity": 1,
-      "timestamp": 1745144044366
-    },
-    {
-      "id": "4c33",
-      "temperature": 28.8,
-      "humidity1": 85,
-      "humidity2": 77,
-      "lightIntensity": 4,
-      "timestamp": 1745144049532
-    },
-    {
-      "id": "49d8",
-      "temperature": 27.5,
-      "humidity1": 82,
-      "humidity2": 61,
-      "lightIntensity": 2,
-      "timestamp": 1745144053665
-    },
-    {
-      "id": "8b70",
-      "temperature": 25.1,
-      "humidity1": 61,
-      "humidity2": 65,
-      "lightIntensity": 4,
-      "timestamp": 1745144058834
-    },
-    {
-      "id": "5b7e",
-      "temperature": 20,
-      "humidity1": 64,
-      "humidity2": 60,
-      "lightIntensity": 5,
-      "timestamp": 1745144064005
-    },
-    {
-      "id": "0ac5",
-      "temperature": 21.4,
+      "id": "7114",
+      "temperature": 26.9,
       "humidity1": 71,
-      "humidity2": 84,
-      "lightIntensity": 4,
-      "timestamp": 1745144069176
-    },
-    {
-      "id": "ae48",
-      "temperature": 22.5,
-      "humidity1": 86,
-      "humidity2": 72,
-      "lightIntensity": 4,
-      "timestamp": 1745144074352
-    },
-    {
-      "id": "72a4",
-      "temperature": 23.8,
-      "humidity1": 88,
-      "humidity2": 62,
-      "lightIntensity": 5,
-      "timestamp": 1745144079524
-    },
-    {
-      "id": "180c",
-      "temperature": 20.6,
-      "humidity1": 73,
-      "humidity2": 86,
+      "humidity2": 90,
       "lightIntensity": 3,
-      "timestamp": 1745144083744
+      "timestamp": 1745171793887
+    },
+    {
+      "id": "326b",
+      "temperature": 21,
+      "humidity1": 69,
+      "humidity2": 87,
+      "lightIntensity": 1,
+      "timestamp": 1745171798892
+    },
+    {
+      "id": "1702",
+      "temperature": 23.5,
+      "humidity1": 65,
+      "humidity2": 73,
+      "lightIntensity": 1,
+      "timestamp": 1745171803901
+    },
+    {
+      "id": "644f",
+      "temperature": 26.5,
+      "humidity1": 64,
+      "humidity2": 62,
+      "lightIntensity": 3,
+      "timestamp": 1745171808906
+    },
+    {
+      "id": "2b68",
+      "temperature": 22.1,
+      "humidity1": 79,
+      "humidity2": 90,
+      "lightIntensity": 1,
+      "timestamp": 1745171813911
+    },
+    {
+      "id": "b24c",
+      "temperature": 29,
+      "humidity1": 75,
+      "humidity2": 89,
+      "lightIntensity": 4,
+      "timestamp": 1745171818915
     }
   ]
 }
