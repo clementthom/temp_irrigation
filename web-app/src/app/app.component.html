@@ -1,14 +1,10 @@
+<header class="navbar is-light">
+  <span class="navbar-item">{{title}}</span>
+  <div class="navbar-brand">
+    <a class="navbar-item" routerLink="/mesures" routerLinkActive="is-active">Measures managment</a>
+    <a class="navbar-item" routerLink="/admin" routerLinkActive="is-active">Admin Dashboard</a>
+  </div>
+</header>
 <main>
-      <h1>Hello, {{ title }}</h1>
-      <p>Congratulations! Your app is running. 🎉</p>
-      <ul>
-      @for(item of list; track item.id) {
-        <li>{{item.date}} : {{item.value}}</li>
-      }
-      </ul>
+  <router-outlet></router-outlet>
 </main>
-<nav>
-  <a routerLink="/mesures" routerLinkActive="active">Gestion des Mesures</a>&nbsp;
-  <a routerLink="/admin" routerLinkActive="active">Admin Dashboard</a>
-</nav>
-<router-outlet></router-outlet>

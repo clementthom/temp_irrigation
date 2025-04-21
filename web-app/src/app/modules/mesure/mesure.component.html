@@ -1,29 +1,50 @@
 <div>
-  <h1>Gestion des Mesures</h1>
+  <div class="control" style="float: right;">
+    <button class="button is-danger" (click)="clearMesures()">Supprimer toutes les mesures</button>
+  </div>
+  <h1 class="title">Gestion des Mesures</h1>
 
   <!-- Formulaire pour ajouter une nouvelle mesure -->
-  <form (ngSubmit)="addMesure()">
-    <label>
-      Température:
-      <input type="number" [(ngModel)]="newMesure.temperature" name="temperature" required />
-    </label>
-    <label>
-      Humidité 1:
-      <input type="number" [(ngModel)]="newMesure.humidity1" name="humidity1" required />
-    </label>
-    <label>
-      Humidité 2:
-      <input type="number" [(ngModel)]="newMesure.humidity2" name="humidity2" required />
-    </label>
-    <label>
-      Intensité lumineuse:
-      <input type="number" [(ngModel)]="newMesure.lightIntensity" name="lightIntensity" required />
-    </label>
-    <button type="submit">Ajouter</button>
+  <form (ngSubmit)="addMesure()" class="box is-flex is-align-items-center is-flex-wrap-wrap">
+    <div class="field mr-2">
+      <label class="label">Température:</label>
+      <div class="control">
+        <input class="input" type="number" [(ngModel)]="newMesure.temperature" name="temperature" required />
+      </div>
+    </div>
+    <div class="field mr-2">
+      <label class="label">Humidité 1:</label>
+      <div class="control">
+        <input class="input" type="number" [(ngModel)]="newMesure.humidity1" name="humidity1" required />
+      </div>
+    </div>
+    <div class="field mr-2">
+      <label class="label">Humidité 2:</label>
+      <div class="control">
+        <input class="input" type="number" [(ngModel)]="newMesure.humidity2" name="humidity2" required />
+      </div>
+    </div>
+    <div class="field mr-2">
+      <label class="label">Intensité lumineuse:</label>
+      <div class="control">
+        <input class="input" type="number" [(ngModel)]="newMesure.lightIntensity" name="lightIntensity" required />
+      </div>
+    </div>
+    <div class="field mr-2">
+      <label class="label">Date</label>
+      <div class="control">
+        <input class="input" type="date" placeholder="Select date">
+      </div>
+    </div>    
+    <div class="field mr-2" style="margin-bottom: 0.75rem;">
+      <label class="label">&nbsp;</label>
+      <div class="control">
+        <button class="button is-primary" type="submit">Ajouter</button>
+      </div>
+    </div>
   </form>
-
   <!-- Tableau des mesures -->
-  <table>
+  <table class="table is-striped is-hoverable is-fullwidth">
     <thead>
       <tr>
         <th>ID</th>
@@ -45,7 +66,7 @@
           <td>{{ mesure.lightIntensity }}</td>
           <td>{{ mesure.timestamp }}</td>
           <td>
-            <button (click)="deleteMesure(mesure.id)">Supprimer</button>
+            <button class="button is-danger is-small" (click)="deleteMesure(mesure.id)">Supprimer</button>
           </td>
         </tr>
       }

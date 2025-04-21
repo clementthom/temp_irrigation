@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Mesure, MesureService } from './mesure.service';
 import { FormsModule } from '@angular/forms';
+import { AdminService } from '../admin/admin/admin.service';
 
 @Component({
   selector: 'app-mesure',
@@ -19,7 +20,10 @@ export class MesureComponent implements OnInit, OnDestroy {
   };
   interval!: ReturnType<typeof setInterval>;
 
-  constructor(private mesureService: MesureService) {}
+  constructor(
+    private mesureService: MesureService,
+    private adminService: AdminService
+  ) {}
 
   ngOnInit(): void {
     this.loadMesures();
@@ -53,4 +57,17 @@ export class MesureComponent implements OnInit, OnDestroy {
       this.loadMesures();
     });
   }
+
+    // Méthode pour appeler la fonction clear
+    clearMesures(): void {
+      this.adminService.clearMesures().subscribe({
+        next: () => {
+          alert('Toutes les mesures ont été supprimées avec succès.');
+        },
+        error: (err: Error) => {
+          console.error('Erreur lors de la suppression des mesures :', err);
+          alert('Une erreur est survenue lors de la suppression des mesures.');
+        }
+      });
+    }
 }

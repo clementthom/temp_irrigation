@@ -1,13 +1,69 @@
-<div class="admin-container">
-  <h1>Admin Dashboard</h1>
-  <p>Bienvenue sur le tableau de bord administrateur.</p>
+<div>
+  <h1 class="title">Tableau de bord administrateur.</h1>
 
-  <!-- Bouton pour supprimer toutes les mesures -->
-  <button (click)="clearMesures()">Supprimer toutes les mesures</button>
-  &nbsp;<button (click)="commandVanne(1, 'open')">Activer la vanne 1</button>
-  &nbsp;<button (click)="commandVanne(1, 'close')">Desactiver la vanne 1</button>
-  &nbsp;<button (click)="commandVanne(2, 'open')">Activer la vanne 2</button>
-  &nbsp;<button (click)="commandVanne(2, 'close')">Desactiver la vanne 2</button>
-  &nbsp;<a href="http://localhost:3000"><button>Serveur JSON</button></a>
-  &nbsp;<a href="http://localhost:3001/api"><button>Swagger</button></a>
+  <div class="columns">
+    <!-- Carte Vannes -->
+    <div class="column">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">Vannes</p>
+        </header>
+        <div class="card-content">
+          <table class="table is-fullwidth">
+            <thead>
+              <tr>
+                <th>Vanne</th>
+                <th colspan="2">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Vanne 1</td>
+                <td>
+                  <button class="button is-link is-light" (click)="commandVanne(1, 'open')">Activer</button>
+                </td>
+                <td>
+                  <button class="button is-link is-light" (click)="commandVanne(1, 'close')">Désactiver</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Vanne 2</td>
+                <td>
+                  <button class="button is-link is-light" (click)="commandVanne(2, 'open')">Activer</button>
+                </td>
+                <td>
+                  <button class="button is-link is-light" (click)="commandVanne(2, 'close')">Désactiver</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carte Mesures -->
+    <div class="column">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">Mesures</p>
+        </header>
+        <div class="card-content">
+          <button class="button is-danger" (click)="clearMesures()">Supprimer toutes les mesures</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carte Serveurs -->
+    <div class="column">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">Serveurs</p>
+        </header>
+        <div class="card-content">
+          <a href="http://localhost:3000" class="button is-primary is-light">Serveur JSON</a>
+          <a href="http://localhost:3001/api" class="button is-primary is-light">Swagger</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
