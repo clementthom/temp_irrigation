@@ -1,0 +1,48 @@
+<div>
+    <div class="control" style="float: right;">
+      <button class="button is-danger" (click)="updateMeteoHourly()">Mettre à jour</button>
+    </div>
+    <h1 class="title">Meteo Hourly</h1>
+    @if (meteoHourly) {
+    <div class="card">
+    <header class="card-header">
+        <p class="card-header-title">
+        {{ meteoHourly.city.name }} ({{ meteoHourly.city.cp }})
+        </p>
+     </header>
+    <div class="card-content">
+        <div class="content">
+        <p><strong>Last Update:</strong> {{ formatDate(meteoHourly.update) }}</p>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <table class="table is-striped is-hoverable is-fullwidth">
+        <thead>
+            <tr>
+            <th>Datetime</th>
+            <th>Wind (km/h)</th>
+            <th>Frost Probability (%)</th>
+            <th>Weather</th>
+            <th>Humidity (%)</th>
+            <th>Rain (mm)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (forecast of meteoHourly.forecast; track forecast.datetime) {
+            <tr>
+                <td>{{ formatDate(forecast.datetime) }}</td>
+                <td>{{ forecast.wind10m }}</td>
+                <td>{{ forecast.probafrost }}</td>
+                <td>{{ forecast.weather }}</td>
+                <td>{{ forecast.rh2m }}</td>
+                <td>{{ forecast.rr10 }}</td>
+            </tr>
+            }
+        </tbody>
+        </table>
+    </footer>
+    </div>
+    } @else {
+        <p>Les données météo par heure n'ont pas été récupérées, veuillez patienter ou rafraichir la page.</p>
+    }
+</div>

@@ -64,7 +64,7 @@
           <td>{{ mesure.humidity1 }}</td>
           <td>{{ mesure.humidity2 }}</td>
           <td>{{ mesure.lightIntensity }}</td>
-          <td>{{ mesure.timestamp }}</td>
+          <td>{{ formatDate(mesure.timestamp) }}</td>
           <td>
             <button class="button is-danger is-small" (click)="deleteMesure(mesure.id)">Supprimer</button>
           </td>

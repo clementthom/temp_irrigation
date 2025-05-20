@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Mesure, MesureService } from './mesure.service';
 import { FormsModule } from '@angular/forms';
 import { AdminService } from '../admin/admin/admin.service';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-mesure',
@@ -69,5 +70,11 @@ export class MesureComponent implements OnInit, OnDestroy {
           alert('Une erreur est survenue lors de la suppression des mesures.');
         }
       });
+    }
+
+    // Formater la date avec Luxon
+    formatDate(date: string | number): string {
+      const dt = typeof date === 'string' ? DateTime.fromISO(date) : DateTime.fromMillis(date);
+      return dt.isValid ? dt.setLocale('fr').toFormat('dd LLLL yyyy HH:mm:ss') : 'Invalid Date';
     }
 }
